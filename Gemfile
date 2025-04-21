@@ -59,3 +59,5 @@ end
 gem "httparty", "~> 0.23.1"
 
 gem 'dotenv-rails', groups: [:development, :test]
+
+gem 'slim-rails'

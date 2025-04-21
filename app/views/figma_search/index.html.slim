@@ -1,0 +1,32 @@
+h1 Yoinker: Figma Component Search
+
+- project_options = @projects&.map { |p| ["#{p[:team]} – #{p[:name]}", p[:id]] }
+
+= form_with url: figma_search_index_path, method: :get, local: true do
+  .form-group
+    = label_tag :project_id, "Select Project"
+    - if project_options&.any?
+      = select_tag :project_id,
+        options_for_select(project_options, params[:project_id]),
+        prompt: "Choose a project"
+    - else
+      p.text-red ⚠️ No projects found. Check your TEAM_IDS or token.
+
+  .form-group
+    = label_tag :component, "Component Name"
+    = text_field_tag :component, params[:component]
+
+  = submit_tag "Search"
+
+- if @results&.any?
+  h2 Found #{@results.count} result(s):
+  ul
+    - @results.each do |r|
+      - encoded_node_id = ERB::Util.url_encode(r[:node_id])
+      - link_url = "https://www.figma.com/file/#{r[:file_key]}?node-id=#{encoded_node_id}&viewport=0,0,1"
+      li
+        strong= r[:type]
+        |  "#{r[:name]}" in #{r[:file]} —
+        = link_to "Open in Figma", link_url, target: "_blank"
+- elsif params[:component].present?
+  p No matches found.
