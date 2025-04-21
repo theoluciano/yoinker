@@ -1,4 +1,5 @@
-h1 Yoinker: Figma Component Search
+h1 Yoinker
+h2 Search for Figma components across multiple teams and projects
 
 - project_options = @projects&.map { |p| ["#{p[:team]} – #{p[:name]}", p[:id]] }
 
@@ -19,7 +20,7 @@ h1 Yoinker: Figma Component Search
   = submit_tag "Search"
 
 - if @results&.any?
-  h2 Found #{@results.count} result(s):
+  h3 Found #{@results.count} result(s):
   ul
     - @results.each do |r|
       - encoded_node_id = ERB::Util.url_encode(r[:node_id])

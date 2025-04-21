@@ -71,12 +71,16 @@ class FigmaScanner
     cache_path = Rails.root.join("tmp", "figma_project_#{@project_id}_files.json")
 
     if File.exist?(cache_path)
-      begin
-        parsed = JSON.parse(File.read(cache_path))
-        return parsed.is_a?(Array) ? parsed : (parsed["files"] || [])
-      rescue => e
-        Rails.logger.warn("Failed to read project file cache: #{e.message}")
-        File.delete(cache_path) if File.exist?(cache_path)
+      if File.mtime(cache_path) < 24.hours.ago
+        File.delete(cache_path)
+      else
+        begin
+          parsed = JSON.parse(File.read(cache_path))
+          return parsed.is_a?(Array) ? parsed : (parsed["files"] || [])
+        rescue => e
+          Rails.logger.warn("Failed to read project file cache: #{e.message}")
+          File.delete(cache_path) if File.exist?(cache_path)
+        end
       end
     end
 
@@ -89,12 +93,16 @@ class FigmaScanner
     cache_path = Rails.root.join("tmp", "figma_cache_#{@project_id}_#{file_key}.json")
 
     if File.exist?(cache_path)
-      JSON.parse(File.read(cache_path))
-    else
-      res = self.class.get("/files/#{file_key}", headers: @headers)
-      File.write(cache_path, res.body)
-      res.parsed_response
+      if File.mtime(cache_path) < 24.hours.ago
+        File.delete(cache_path)
+      else
+        return JSON.parse(File.read(cache_path))
+      end
     end
+
+    res = self.class.get("/files/#{file_key}", headers: @headers)
+    File.write(cache_path, res.body)
+    res.parsed_response
   end
 
   def search_nodes_recursively(node, file_name, file_key, results = [])
