@@ -63,6 +63,7 @@ class FigmaScanner
     results = threads.flat_map(&:value)
 
     puts "Done in #{Time.now - start} seconds"
+    puts "Total matches: #{results.size}"
     results
   end
 
@@ -98,10 +99,14 @@ class FigmaScanner
 
   def search_nodes_recursively(node, file_name, file_key, results = [])
     if node["type"] == "INSTANCE"
-      main_name = node.dig("mainComponent", "name")
-      if main_name&.casecmp?(@component_name)
+      name_to_match = node.dig("mainComponent", "name") || node["name"]
+
+      matched = name_to_match&.casecmp(@component_name)&.zero?
+
+      if matched
+        puts "✅ Match (INSTANCE): #{name_to_match} in #{file_name}"
         results << {
-          name: main_name,
+          name: name_to_match,
           file: file_name,
           file_key: file_key,
           node_id: node["id"],
