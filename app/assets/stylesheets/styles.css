@@ -28,8 +28,23 @@ label {
   margin-bottom: 12px;
 }
 
+body {
+  height: 100dvh;
+  margin: 0;
+  box-sizing: border-box;
+  padding-block: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.window {
+  box-sizing: border-box;
+  width: 70vw;
+  margin: auto;
+}
+
 .window-pane {
-  overflow: hidden;
+  overflow: auto;
 }
 
 .searching::after {
