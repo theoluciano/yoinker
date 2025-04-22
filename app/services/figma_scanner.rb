@@ -112,7 +112,7 @@ class FigmaScanner
       matched = name_to_match&.casecmp(@component_name)&.zero?
 
       if matched
-        puts "✅ Match (INSTANCE): #{name_to_match} in #{file_name}"
+        puts "Match: #{name_to_match} in #{file_name}"
         results << {
           name: name_to_match,
           file: file_name,
