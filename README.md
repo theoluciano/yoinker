@@ -11,5 +11,6 @@ If you have questions about the architecture, tests, security, vulnerabilities..
 
 Hope my dear designers out there are able to keep their hair now that Yoinker is here to help!
 
-<img width="1090" alt="image" src="https://github.com/user-attachments/assets/038adc3f-1990-4426-8707-71f91455fe93" />
+<img width="878" alt="image" src="https://github.com/user-attachments/assets/41c1f4de-b123-4620-9a35-f246a5f7165b" />
+
 
