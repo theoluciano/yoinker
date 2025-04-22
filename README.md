@@ -10,3 +10,6 @@ You'll need a Figma personal access token and the IDs to which teams you want Yo
 If you have questions about the architecture, tests, security, vulnerabilities... I'm sorry, I'm not your guy, at least at this moment. I straight up vibe coded this thing in an afternoon and evening.
 
 Hope my dear designers out there are able to keep their hair now that Yoinker is here to help!
+
+<img width="1090" alt="image" src="https://github.com/user-attachments/assets/038adc3f-1990-4426-8707-71f91455fe93" />
+
