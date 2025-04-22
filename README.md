@@ -7,6 +7,6 @@ So behold ... I give you.... Yoinker!
 ---
 You'll need a Figma personal access token and the IDs to which teams you want Yoinker to be able to parse through. Just clone the repo, create your .env file and add the token and IDs, bundle it all up, and you'll be in your way!
 
-If you have questions about the architecture, tests, security, vulnerabilities... I'm sorry, I'm not your guy, at least at this moment. I straight up vibe coded this thing in an afternoon and evening
+If you have questions about the architecture, tests, security, vulnerabilities... I'm sorry, I'm not your guy, at least at this moment. I straight up vibe coded this thing in an afternoon and evening.
 
 Hope my dear designers out there are able to keep their hair now that Yoinker is here to help!
