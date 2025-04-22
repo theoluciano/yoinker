@@ -38,6 +38,7 @@ body {
 }
 
 .window {
+  display: flex;
   box-sizing: border-box;
   width: 70vw;
   margin: auto;
@@ -45,6 +46,7 @@ body {
 
 .window-pane {
   overflow: auto;
+  flex: 1;
 }
 
 .searching::after {
@@ -57,4 +59,27 @@ body {
   33%  { content: '..'; }
   66%  { content: '...'; }
   100% { content: '.'; }
+}
+
+details {
+  &:hover {
+    background-color: #000;
+    color: #fff;
+  }
+
+  & > summary {
+    list-style-position: outside;
+    font-weight: 600;
+    padding-block: 8px;
+    padding-left: 4px;
+    margin-left: 28px;
+    cursor: pointer;
+  }
+}
+
+details[open] {
+  &:hover {
+    background-color: initial;
+    color: initial;
+  }
 }

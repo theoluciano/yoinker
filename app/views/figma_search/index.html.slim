@@ -30,15 +30,18 @@
       .separator
       p.searching Searching
     - if @results&.any?
-      .separator
-      h3 Found #{@results.count} result(s):
-      ul
-        - @results.each do |r|
-          - encoded_node_id = ERB::Util.url_encode(r[:node_id])
-          - link_url = "https://www.figma.com/file/#{r[:file_key]}/Yoinker?type=design&node-id=#{encoded_node_id}&mode=design"
-          li
-            | Found instance in #{r[:file]} — 
-            = link_to "Open in Figma", link_url, target: "_blank", rel: "noopener"
+      - grouped = @results.group_by { |r| r[:file] }
+      - grouped.each do |file_name, results|
+        .separator
+        details
+          summary = "#{results.count} result#{'s' if results.count != 1} in #{file_name}"
+          ul
+            - results.each do |r|
+              - encoded_node_id = ERB::Util.url_encode(r[:node_id])
+              - link_url = "https://www.figma.com/file/#{r[:file_key]}/Yoinker?type=design&node-id=#{encoded_node_id}&mode=design"
+              li
+                | #{r[:page]} — 
+                = link_to "Open in Figma", link_url, target: "_blank", rel: "noopener"
     - elsif params[:component].present?
       .separator
       p No matches found.

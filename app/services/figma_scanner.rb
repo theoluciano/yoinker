@@ -105,27 +105,31 @@ class FigmaScanner
     res.parsed_response
   end
 
-  def search_nodes_recursively(node, file_name, file_key, results = [])
+  def search_nodes_recursively(node, file_name, file_key, results = [], page_name = nil)
+    # Detect if this node is a page (FRAME directly under the document)
+    if node["type"] == "CANVAS"
+      page_name = node["name"]
+    end
+
     if node["type"] == "INSTANCE"
       name_to_match = node.dig("mainComponent", "name") || node["name"]
-
       matched = name_to_match&.casecmp(@component_name)&.zero?
 
       if matched
-        puts "Match: #{name_to_match} in #{file_name}"
         results << {
           name: name_to_match,
           file: file_name,
           file_key: file_key,
           node_id: node["id"],
-          type: node["type"]
+          type: node["type"],
+          page: page_name
         }
       end
     end
 
     if node["children"]
       node["children"].each do |child|
-        search_nodes_recursively(child, file_name, file_key, results)
+        search_nodes_recursively(child, file_name, file_key, results, page_name)
       end
     end
 
