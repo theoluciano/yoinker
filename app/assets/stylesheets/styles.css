@@ -31,3 +31,15 @@ label {
 .window-pane {
   overflow: hidden;
 }
+
+.searching::after {
+  content: '.';
+  animation: dots 1.5s steps(3, end) infinite;
+}
+
+@keyframes dots {
+  0%   { content: '.'; }
+  33%  { content: '..'; }
+  66%  { content: '...'; }
+  100% { content: '.'; }
+}

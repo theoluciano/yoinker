@@ -7,7 +7,7 @@
     h2 Search for Figma components across multiple teams and projects
     - project_options = @projects&.map { |p| ["#{p[:team]} – #{p[:name]}", p[:id]] }
 
-    = form_with url: figma_search_index_path, method: :get, local: true do
+    = form_with url: figma_search_index_path, method: :get, local: true, html: { id: "search-form" } do
       section
         .form-group
           = label_tag :project_id, "Select Project"
@@ -26,16 +26,32 @@
         .field-row
           = submit_tag "Search", class: "btn"
 
+    #loading-indicator style="display: none"
+      .separator
+      p.searching Searching
     - if @results&.any?
       .separator
       h3 Found #{@results.count} result(s):
       ul
         - @results.each do |r|
           - encoded_node_id = ERB::Util.url_encode(r[:node_id])
-          - link_url = "https://www.figma.com/file/#{r[:file_key]}?node-id=#{encoded_node_id}&viewport=0,0,1"
+          - link_url = "https://www.figma.com/file/#{r[:file_key]}/Yoinker?type=design&node-id=#{encoded_node_id}&mode=design"
           li
             | Found instance in #{r[:file]} — 
-            = link_to "Open in Figma", link_url, target: "_blank"
+            = link_to "Open in Figma", link_url, target: "_blank", rel: "noopener"
     - elsif params[:component].present?
       .separator
       p No matches found.
+
+script
+  |
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("search-form");
+      const loading = document.getElementById("loading-indicator");
+
+      if (form && loading) {
+        form.addEventListener("submit", () => {
+          loading.style.display = "block";
+        });
+      }
+    });
