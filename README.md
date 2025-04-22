@@ -1,6 +1,6 @@
 # README
 
-This app is meant for my friends out there who are working in large Figma projects and feel like they're losing their minds cause the know they created _that_ component but for the life of them, they can't remember where it was used. Going through each of your many files is a waste of your precious time.
+This app is meant for my friends out there who are working in large Figma projects and feel like they're losing their minds cause they know they created _that_ component but for the life of them, they can't remember where it was used. Going through each of your many files is a waste of your precious time.
 
 So behold ... I give you.... Yoinker!
 
