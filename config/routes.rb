@@ -11,5 +11,5 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "figma_search#index"
-  resources :figma_search, only: [:index]
+  resources :figma_search, only: [ :index ]
 end

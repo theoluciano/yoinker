@@ -1,9 +1,9 @@
-require 'httparty'
-require 'json'
+require "httparty"
+require "json"
 
 class FigmaScanner
   include HTTParty
-  base_uri 'https://api.figma.com/v1'
+  base_uri "https://api.figma.com/v1"
 
   def initialize(project_id, component_name)
     @project_id = project_id

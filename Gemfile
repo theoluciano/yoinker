@@ -58,6 +58,6 @@ end
 
 gem "httparty", "~> 0.24.0"
 
-gem 'dotenv-rails', groups: [:development, :test]
+gem "dotenv-rails", groups: [ :development, :test ]
 
-gem 'slim-rails'
+gem "slim-rails"
